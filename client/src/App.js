@@ -4,13 +4,15 @@ import Loginpage from './pages/Loginpage';
 import Signuppage from './pages/Signuppage';
 import HomePages from './pages/HomePages';
 import Formpage from './pages/Formpage';
-import Sidebarpage from './pages/Admin/Sidebarpage';
 import Adminloginpage from './pages/Admin/Adminloginpage';
+import BookingSlot from './pages/Admin/BookingSlot';
+import Applicantpage from './pages/Admin/Applicantpage';
 
 
 function App() {
   return (
     <div className="App">
+      
       <Router>
 
        <Routes>
@@ -21,8 +23,9 @@ function App() {
        </Routes>
 
        <Routes>
-        <Route path='/dashboard' element={<Sidebarpage />}/>
         <Route path='/adminlogin' element={<Adminloginpage />}/>
+        <Route path='/booking' element={<BookingSlot />}/>
+        <Route path='/applicants' element={<Applicantpage />}/>
        </Routes>
 
       

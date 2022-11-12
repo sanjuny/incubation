@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const {getForm} = require('../Controller/adminController')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/form',getForm)
 
 module.exports = router;

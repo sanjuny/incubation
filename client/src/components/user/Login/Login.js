@@ -13,7 +13,6 @@ function Login() {
     }
 
     const handleSubmit = (e) =>{
-        console.log('dfghgfh');
         e.preventDefault();
         seterrors(Validate(formValues));
         setsubmit(true);

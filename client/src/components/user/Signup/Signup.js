@@ -20,9 +20,7 @@ function Signup() {
         e.preventDefault();
         seterrors(Validate(formValues));
         setsubmit(true);
-        console.log('fghjk');
-        console.log(errors);
-        console.log(Object.keys(errors).length);
+
 
         if(Object.keys(errors).length === 0){
 
