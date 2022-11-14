@@ -15,7 +15,7 @@ const formSchema = mongoose.Schema({
     phone:{
         type:Number,
         required:[true, "Phone Number is required"],
-        unique:true,
+        // unique:true,
         minlength:[10,"phone number should need 10"]
     },
 

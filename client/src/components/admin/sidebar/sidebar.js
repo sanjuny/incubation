@@ -4,12 +4,16 @@ import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { MdTrackChanges } from "react-icons/md";
 import { FaBook } from "react-icons/fa";
 import { AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineFileDone } from "react-icons/ai";
+import { MdCancel } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
 function Sidebar() {
 
     const menus = [
         { name: "Applicant List", link: '/', icon: AiOutlineUsergroupAdd },
+        { name: "Approved List", link: '/', icon: AiOutlineFileDone },
+        { name: "Rejected List", link: '/', icon: MdCancel },
         { name: "Booking Slots", link: '/', icon: FaBook },
         { name: "Record Track", link: '/', icon: MdTrackChanges },
         { name: "Logout", link: '/', icon: AiOutlineLogout },

@@ -7,6 +7,8 @@ import Formpage from './pages/Formpage';
 import Adminloginpage from './pages/Admin/Adminloginpage';
 import BookingSlot from './pages/Admin/BookingSlot';
 import Applicantpage from './pages/Admin/Applicantpage';
+import Approvedpage from './pages/Admin/Approvedpage';
+import Rejectedpage from './pages/Admin/Rejectedpage';
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
         <Route path='/adminlogin' element={<Adminloginpage />}/>
         <Route path='/booking' element={<BookingSlot />}/>
         <Route path='/applicants' element={<Applicantpage />}/>
+        <Route path='/approved' element={<Approvedpage />}/>
+        <Route path='/reject' element={<Rejectedpage />}/>
        </Routes>
 
       
