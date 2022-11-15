@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom';
 
 function Form() {
 
   const intialValues = { name: "", address: "", city: "", email: "", phone: "", company_name: "" };
   const [formValues, setFormValues] = useState(intialValues);
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -14,6 +17,7 @@ function Form() {
   const handleSubmit = (e) => {
     axios.post('http://localhost:7000/form', { ...formValues }).then((res) => {
       console.log(res, 'hellllooo');
+      navigate('/homepage')
     })
 
   }

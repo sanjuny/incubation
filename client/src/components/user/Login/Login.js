@@ -1,7 +1,11 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 
 function Login() {
+
+    const navigate = useNavigate()
+
     const intialValues = {email:"", password:""};
     const [formValues, setFormValues] = useState(intialValues);
     const [errors, seterrors] = useState({});
@@ -14,8 +18,17 @@ function Login() {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        seterrors(Validate(formValues));
-        setsubmit(true);
+        axios.post('http://localhost:7000/login',{...formValues}).then((res)=>{
+            console.log(res,'call');
+            if(res.data.auth){
+                console.log('zxcvbnm,');
+                localStorage.setItem('userToken',res.data.token)
+                navigate('/homepage')
+            }
+        }).catch((err)=>{
+            alert(err.message)
+            seterrors(err.message)
+        })
     }
 
     useEffect(()=>{
@@ -90,7 +103,7 @@ function Login() {
                                     </div>
 
                                     <div class="text-center lg:text-left">
-                                        <button
+                                        <button type='submit'
                                             class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Login
                                         </button>
                                         <p className="text-sm font-semibold mt-2 pt-1 mb-0">

@@ -1,7 +1,9 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import image from '../../../images/img-2.jpg'
 
 function Home() {
+
   return (
     <div className="backImg font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover">
 
@@ -10,7 +12,7 @@ function Home() {
       <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
 
 
-        <div  className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-silver-300 opacity-75 mx-6 lg:mx-0">
+        <div className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-silver-300 opacity-75 mx-6 lg:mx-0">
 
 
           <div className="p-4 md:p-12 text-center lg:text-left">
@@ -24,28 +26,24 @@ function Home() {
             <p className="pt-8 text-sm">Register Your Company name here.</p>
 
             <div className="pt-12 pb-8">
-              <button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
-              Click Here
-              </button>
+              <Link to='/form'><button Link to="/form" className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
+                Click Here
+              </button></Link>
             </div>
 
-          
-
-
           </div>
-
         </div>
 
 
         <div className="w-full lg:w-2/5">
 
-          <img src={image} className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"/>
+          <img src={image} className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" />
 
         </div>
 
 
 
-      
+
       </div>
     </div>
   )

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { HiMenuAlt2 } from "react-icons/hi";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
-import { MdTrackChanges } from "react-icons/md";
 import { FaBook } from "react-icons/fa";
 import { AiOutlineLogout } from "react-icons/ai";
 import { AiOutlineFileDone } from "react-icons/ai";
@@ -11,19 +10,18 @@ import { Link } from 'react-router-dom';
 function Sidebar() {
 
     const menus = [
-        { name: "Applicant List", link: '/', icon: AiOutlineUsergroupAdd },
-        { name: "Approved List", link: '/', icon: AiOutlineFileDone },
-        { name: "Rejected List", link: '/', icon: MdCancel },
-        { name: "Booking Slots", link: '/', icon: FaBook },
-        { name: "Record Track", link: '/', icon: MdTrackChanges },
+        { name: "Applicant List", link: '/applicants', icon: AiOutlineUsergroupAdd },
+        { name: "Approved List", link: '/approved', icon: AiOutlineFileDone },
+        { name: "Rejected List", link: '/reject', icon: MdCancel },
+        { name: "Booking Slots", link: '/booking', icon: FaBook },
         { name: "Logout", link: '/', icon: AiOutlineLogout },
 
     ];
 
     const [open, setOpen] = useState(true);
     return (
-        <section className='flex gap-6'>
-            <div className={`bg-[#0e0e0e] min-h-screen ${open ? 'w-72' : 'w-16'}
+        <section className={`flex gap-6 ${open ? 'w-72' : 'w-16'}`}>
+            <div className={`bg-[#0e0e0e] min-h-screen fixed ${open ? 'w-72' : 'w-16'}
             duration-500 text-gray-100 px-4`}>
 
                 <div className='py-3 flex justify-end'>
