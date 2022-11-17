@@ -19,7 +19,7 @@ const postAdminLogin = async (req, res)=>{
             if(adminPass == req.body.password){
                 const id = '3sedyrf678a'
                 console.log("pass ok");
-                const token = jwt.sign({id}, process.env.JWT_ADMINSECERT,{
+                const token = jwt.sign({id}, process.env.JWT_SECERT,{
                     expiresIn:300,
                 })
                 console.log('kk');

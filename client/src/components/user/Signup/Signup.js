@@ -20,12 +20,10 @@ function Signup() {
         e.preventDefault();
         seterrors(Validate(formValues));
         setsubmit(true);
-
-
         if(Object.keys(errors).length === 0){
-
             axios.post('http://localhost:7000/signup',{...formValues}).then((res)=>{
                 console.log(res,'yuio;');
+                navigate('/login')
             })
         }
 
@@ -67,11 +65,11 @@ function Signup() {
             errors.password ='Password cannot exceed more than 10 characters'
           }
 
-          if(!values.confirmPassword){
-            errors.confirmPassword = "Password is required"
-          }else if(values.password != values.confirmPassword){
-            errors.password ='Password must be match'
-          }
+          // if(!values.confirmPassword){
+          //   errors.confirmPassword = "Password is required"
+          // }else if(values.password != values.confirmPassword){
+          //   errors.password ='Password must be match'
+          // }
 
           return errors
     }
@@ -127,7 +125,7 @@ function Signup() {
                                      onChange={handleChange}/>
                                 </div>
                                 <p className="text-red-600">{errors.password}</p>
-                                <div class="mt-4">
+                                {/* <div class="mt-4">
                                     <label class="block">Confirm Password</label>
                                     <input
                                      type="password"
@@ -136,8 +134,8 @@ function Signup() {
                                      class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                                      value={formValues.confirmPassword}
                                      onChange={handleChange}/>
-                                </div>
-                                <p className="text-red-600">{errors.confirmPassword}</p>
+                                </div> */}
+                                {/* <p className="text-red-600">{errors.confirmPassword}</p> */}
                                 <div class="flex">
                                     <button class="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Create
                                         Account</button>

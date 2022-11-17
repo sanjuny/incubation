@@ -1,21 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiMenuAlt2 } from "react-icons/hi";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { FaBook } from "react-icons/fa";
 import { AiOutlineLogout } from "react-icons/ai";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Sidebar() {
+const navigate=useNavigate()
+
+useEffect(()=>{
+    const token = localStorage.getItem('AdminToken')
+    if(!token){
+        navigate('/adminlogin')
+    }
+})
+
+const Logout = ()=>{
+
+    localStorage.removeItem('AdminToken')
+    navigate('/adminlogin')
+}
+
 
     const menus = [
         { name: "Applicant List", link: '/applicants', icon: AiOutlineUsergroupAdd },
         { name: "Approved List", link: '/approved', icon: AiOutlineFileDone },
         { name: "Rejected List", link: '/reject', icon: MdCancel },
-        { name: "Booking Slots", link: '/booking', icon: FaBook },
-        { name: "Logout", link: '/', icon: AiOutlineLogout },
-
+        { name: "Booking Slots", link: '/booking', icon: FaBook},
     ];
 
     const [open, setOpen] = useState(true);
@@ -59,6 +72,9 @@ function Sidebar() {
                         </Link>
                     ))}
                 </div>
+                <button class="bg-red-500 hover:bg-red-900 text-white font-bold py-2 px-4 rounded-full mt-5 mr-14" onClick={Logout}>
+               LogOut
+              </button>
             </div>
 
         </section>

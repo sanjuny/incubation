@@ -1,24 +1,30 @@
-const jwt = require('jsonwebtoken')
-const User = ('../Models/userSchema')
+const jwt = require("jsonwebtoken")
 
-const protect = async (req, res, next) => {
+const check =async (req, res, next) => {
     try {
-        console.log('jwt verification');
-        console.log(req.body.token, 'req.bodyy');
-        const token = req.body.token
-        const verify = jwt.verify(token, process.env.JWT_SECERT)
-        console.log('helooo');
-        console.log(verify,'verifyyyyy'); 
-        if (verify) {
-            req.userId = verify.id
-            next()
-        } else {
-            console.log('tokwn not valit');
-            res.json({ status: 'errors', msg: 'Token invalid' })
+        console.log("Check middleware")
+
+        let token = req.headers["x-access-token"]
+        console.log(req.headers,"hey");
+        if(token){
+            // authHeader = authHeader.replaceAll('"',"")
+            // const token = authHeader.split(" ")[1]
+
+            console.log(token,"yuyuyuy");
         }
+        const user = jwt.verify(token, process.env.JWT_SECERT)
+        console.log(user,"jkjkj");
+       if(user){
+        req.user=user
+        next()
+       }else{
+        res.send({ status: "errors", data: "no user" })
+       }
     } catch (error) {
-        res.json({ status: 'error', msg: 'Something error' })
+        console.log(error.message,"kjkkkjk");
+        res.status(500).json({ status: "errors", data: error.message })
     }
+
 }
 
-module.exports = { protect }
+module.exports = check;

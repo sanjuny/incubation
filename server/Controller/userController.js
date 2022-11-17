@@ -22,7 +22,7 @@ const postSignup = async (req, res) => {
                 phone,
                 password
             }).then((response) => {
-    
+                res.json('hello')
             })
             console.log(req.body);
         }

@@ -32,7 +32,7 @@ function AdminLogin() {
           console.log(res,'poooo');
           if (res.data.auth) {
             console.log('zxcvbnm,');
-            localStorage.setItem('userToken', res.data.token)
+            localStorage.setItem('AdminToken', res.data.token)
             navigate('/approved')
           }
         }).catch((err)=>{

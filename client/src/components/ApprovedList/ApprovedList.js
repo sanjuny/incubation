@@ -5,8 +5,8 @@ import { ApplicationContext } from '../../context/ApplicationContext'
 
 function ApprovedList() {
 
-    const [applications, setApplications] = useContext(ApplicationContext)
-    console.log(setApplications, 'setApplications');
+    // const [applications, setApplications] = useContext(ApplicationContext)
+    // console.log(setApplications, 'setApplications');
 
     const [form, setForm] = useState([])
     const [open, setOpen] = useState(false)
@@ -14,7 +14,7 @@ function ApprovedList() {
 
     useEffect(() => {
         try {
-            axios.get('http://localhost:7000/admin/approved').then((response) => {
+            axios.get('http://localhost:7000/admin/approved', {headers:{"x-access-token":localStorage.getItem('AdminToken')}}).then((response) => {
                 console.log(response.data, 'iuytrew');
                 if (response.data) {
                     console.log(response.data, 'hi');
@@ -30,6 +30,8 @@ function ApprovedList() {
 
         }
     }, [])
+
+    console.log(form,"iuiuiuiii");
 
     const openMODal = (id) => {
         axios.post('http://localhost:7000/admin/bookingModal/' + id).then((response) => {
