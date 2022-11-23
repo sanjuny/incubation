@@ -26,10 +26,11 @@ function Login() {
             seterrors("password is required")
         } else {
             axios.post('http://localhost:7000/login', { ...formValues }).then((res) => {
-                console.log(res, 'call');
+                console.log(res.data.user, 'call');
                 if (res.data.auth) {
                     console.log('zxcvbnm,');
                     localStorage.setItem('userToken', res.data.token)
+                    localStorage.setItem('user', JSON.stringify( res.data.user ) )
                     navigate('/homepage')
                 }
             }).catch((err) => {

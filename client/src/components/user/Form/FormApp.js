@@ -5,10 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 function Form() {
 
   const [errorMessage, setErrorMessage] = useState('')
-  const intialValues = { name: "", address: "", city: "", email: "", phone: "", company_name: "" };
+  const intialValues = { name: "", address: "", city: "", email: "", phone: "", company_name: ""};
   const [formValues, setFormValues] = useState(intialValues);
 
-
+  let user = JSON.parse(localStorage.getItem('user'))  
+  console.log(user._id,'user');
   const logout = () =>{
     alert('are you sure want to logout')
     localStorage.removeItem('userToken')
@@ -48,7 +49,7 @@ function Form() {
     } else if (!formValues.company_name) {
       setErrorMessage("Company name is required");
     } else {
-      axios.post('http://localhost:7000/form', { ...formValues }).then((res) => {
+      axios.post('http://localhost:7000/form', { ...formValues , userId: user._id}).then((res) => {
         console.log(res, 'hellllooo');
         navigate('/homepage')
       }).catch((err) => {

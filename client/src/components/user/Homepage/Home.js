@@ -1,11 +1,37 @@
+import axios from 'axios'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import image from '../../../images/img-2.jpg'
 
 function Home() {
+  const navigate = useNavigate()
+
+  let user = JSON.parse(localStorage.getItem('user'))  
+ let userId = user._id
+  const check = (e)=>{
+    axios.get(`http://localhost:7000/check/${userId}`).then((response)=>{
+    if(response.data.message == 'pending'){
+      alert("form response is already submitted")
+    }else{
+    navigate('/form')
+
+    }
+    })
+
+  }
+
+  
+  const logout = () =>{
+    alert('are you sure want to logout')
+    localStorage.removeItem('userToken')
+    // removeCookie("token");
+    navigate('/login')
+  }
 
   return (
+    
     <div className="backImg font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover">
+      <button onClick={logout} type="button" className="inline-block px-6 py-2.5  bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out float-right">Log Out</button>
 
 
 
@@ -26,17 +52,14 @@ function Home() {
             <p className="pt-8 text-sm">Register Your Company name here.</p>
 
             <div className="pt-12 pb-8">
-              <Link to='/form'><button Link to="/form" className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
+              <button  onClick={check} className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
                 Click Here
-              </button></Link>
+              </button>
             </div>
 
           </div>
         </div>
-
-
         <div className="w-full lg:w-2/5">
-
           <img src={image} className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" />
 
         </div>

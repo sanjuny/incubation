@@ -2,36 +2,61 @@ import React, { useEffect, useState } from 'react'
 import { HiMenuAlt2 } from "react-icons/hi";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { FaBook } from "react-icons/fa";
-import { AiOutlineLogout } from "react-icons/ai";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 function Sidebar() {
-const navigate=useNavigate()
+    const navigate = useNavigate()
 
-useEffect(()=>{
-    const token = localStorage.getItem('AdminToken')
-    if(!token){
-        navigate('/adminlogin')
+    useEffect(() => {
+        const token = localStorage.getItem('AdminToken')
+        if (!token) {
+            navigate('/adminlogin')
+        }
+    })
+
+
+
+    const Logout = () => {
+        confirmAlert({
+            title: 'Approve Application',
+            message: "Are you sure to Approve this Application",
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        localStorage.removeItem('AdminToken')
+                        navigate('/adminlogin')
+    
+                    }
+    
+                },
+                {
+                    label: 'No'
+                }
+    
+    
+            ]
+        });
     }
-})
 
-const Logout = ()=>{
+   
 
-    localStorage.removeItem('AdminToken')
-    navigate('/adminlogin')
-}
 
 
     const menus = [
         { name: "Applicant List", link: '/applicants', icon: AiOutlineUsergroupAdd },
         { name: "Approved List", link: '/approved', icon: AiOutlineFileDone },
         { name: "Rejected List", link: '/reject', icon: MdCancel },
-        { name: "Booking Slots", link: '/booking', icon: FaBook},
+        { name: "Booking Slots", link: '/booking', icon: FaBook },
     ];
 
+
     const [open, setOpen] = useState(true);
+
     return (
         <section className={`flex gap-6 ${open ? 'w-72' : 'w-16'}`}>
             <div className={`bg-[#0e0e0e] min-h-screen fixed ${open ? 'w-72' : 'w-16'}
@@ -73,10 +98,9 @@ const Logout = ()=>{
                     ))}
                 </div>
                 <button class="bg-red-500 hover:bg-red-900 text-white font-bold py-2 px-4 rounded-full mt-5 mr-14" onClick={Logout}>
-               LogOut
-              </button>
+                    LogOut
+                </button>
             </div>
-
         </section>
 
     )

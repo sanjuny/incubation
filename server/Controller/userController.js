@@ -3,6 +3,7 @@ const { db } = require('../Models/userSchema');
 const User = require('../Models/userSchema');
 const form = require('../Models/formSchema');
 const jwt = require('jsonwebtoken');
+// const { default: Login } = require('../../client/src/components/user/Login/Login');
 
 
 /* ----------------------------- GENEERATE TOKEN ---------------------------- */
@@ -33,8 +34,9 @@ const postSignup = async (req, res) => {
 }
 
 const postForm = (req, res) => {
+    console.log(req.body.userId,'lolol');
 
-    let { name, address, city, email, phone, company_name } = req.body;
+    let { name, address, city, email, phone, company_name , userId} = req.body;
 
     form.create({
         name,
@@ -42,7 +44,8 @@ const postForm = (req, res) => {
         city,
         email,
         phone,
-        company_name
+        company_name,
+        userId
     }).then((response) => {
 
     })
@@ -51,6 +54,22 @@ const postForm = (req, res) => {
     res.json({ message: "messageeeeeeeeeeee" })
 
 
+}
+
+const postCheck = async(req,res)=>{
+    try {
+       console.log(req.params.id); 
+
+    let aspire =   await form.findOne({userId : req.params.id , status : 'pending'})
+    if(aspire){
+        res.json({message:"pending"})
+    }else{
+        res.json({message:"hello"})
+
+    }
+    } catch (error) {
+        
+    }
 }
 
 const postLogin = async(req, res) =>{
@@ -67,7 +86,7 @@ const postLogin = async(req, res) =>{
                     expiresIn:300,
                 })
                     console.log('fffffff');
-               res.status(200).json({auth: true, token: token});
+               res.status(200).json({auth: true, token: token , user: user});
             }else{
                 console.log('in else 1');
                 res.status(500).json({ message: "password doesn't exist"})
@@ -86,4 +105,4 @@ const postLogin = async(req, res) =>{
 
 
 
-module.exports = { postSignup, postForm , postLogin}
+module.exports = { postSignup, postForm , postLogin, postCheck}

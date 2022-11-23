@@ -11,7 +11,6 @@ function AdminLogin() {
 
   const navigate = useNavigate()
 
-
   const handleChange = (e) => {
     console.log(e.target, 'jhgfd');
     e.preventDefault()
@@ -25,7 +24,9 @@ function AdminLogin() {
     try {
       if (!formValues.email) {
         setErrorMsg('Email is Required!')
-      } else if (!formValues.password) {
+      }else if (!formValues.email.match(/^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)){
+        setErrorMsg('Email is invalid')
+      }else if (!formValues.password) {
         setErrorMsg('Password cannot be empty')
       } else {
          axios.post('http://localhost:7000/admin/adminlogin', { ...formValues }).then((res) => {
@@ -42,20 +43,16 @@ function AdminLogin() {
       }
     } catch (error) {
       console.log(error);
-
     }
   }
 
 
   return (
-
-
     <main
       class="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white">
-
       <section class="flex w-[30rem] flex-col space-y-10">
         <div class="text-center text-4xl font-medium">Admin LogIn</div>
-
+        {errorMsg && <div className="p-2 mb-2 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert"> {errorMsg}</div>}
         <form onSubmit={handlesubmit}>
           <div class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
             <input
